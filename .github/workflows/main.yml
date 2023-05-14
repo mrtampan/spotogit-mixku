@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      artist:
+        description: 'Input url artist spotify'
+        required: true
+      album:
+        description: 'Input url album spotify'
+        required: true
+      song:
+        description: 'Input url song spotify'
+        required: true
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Installing Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install Depedenciest npm
+        run: |
+          npm install
+      - name: Running app
+        run: |
+          node app.js
+      - name: Commit
+        run: |
+          git config --local user.name "spotogit"
+          git config --local user.email "mrtampan54@gmail.com"
+          git add .
+          git commit -m "[AUTO:BUILD] build from musiclist.json"
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: 'main'
