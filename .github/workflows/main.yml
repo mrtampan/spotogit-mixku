@@ -17,6 +17,8 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Installing ffmpeg
+        run: apt install ffmpeg
       - uses: actions/checkout@master
       - name: Installing Node
         uses: actions/setup-node@v1
