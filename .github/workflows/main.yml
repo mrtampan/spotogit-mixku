@@ -27,7 +27,7 @@ jobs:
           npm install
       - name: Running app
         run: |
-          node app.js
+          node app.js ${{ github.event.inputs.artist }} ${{ github.event.inputs.album }} ${{ github.event.inputs.song }}
       - name: Commit
         run: |
           git config --local user.name "spotogit"
