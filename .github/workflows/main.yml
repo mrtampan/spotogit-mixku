@@ -12,6 +12,7 @@ on:
       song:
         description: 'Input url song spotify'
         required: true
+
 jobs:
   build:
     name: Build
@@ -21,7 +22,7 @@ jobs:
         run: sudo apt-get update
       - name: Installing ffmpeg
         run: sudo apt-get install -y ffmpeg
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Installing Node
         uses: actions/setup-node@v3
         with:
@@ -36,7 +37,7 @@ jobs:
         run: |
           git config --local user.name "mrtampan"
           git config --local user.email "mrtampan54@gmail.com"
-          git add .
+          git add -A
           git commit -m "[AUTO:BUILD] build from musiclist.json"
       - name: Push
         uses: ad-m/github-push-action@v0.6.0
